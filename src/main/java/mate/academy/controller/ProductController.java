@@ -60,6 +60,6 @@ public class ProductController {
     }
 
     private URI toUri(Long id) {
-        return URI.create(String.format("/api/ /%s", id));
+        return URI.create(String.format("/api/product/%s", id));
     }
 }

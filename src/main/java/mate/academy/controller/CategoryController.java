@@ -59,6 +59,6 @@ public class CategoryController {
     }
 
     private URI toUri(Long id) {
-        return URI.create(String.format("/api/ /%s", id));
+        return URI.create(String.format("/api/category/%s", id));
     }
 }
