@@ -1,7 +1,10 @@
 package mate.academy.controller;
 
+import mate.academy.controller.exception.NotMatchedPasswordsException;
 import mate.academy.controller.model.UserExt;
+import mate.academy.model.Role;
 import mate.academy.model.User;
+import mate.academy.service.RoleService;
 import mate.academy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
 import java.util.List;
@@ -47,8 +52,13 @@ public class UserController {
 
     @CrossOrigin("http://localhost:4200")
     @RequestMapping(value = "/api/user", method = RequestMethod.POST)
-    public ResponseEntity<User> add(@RequestBody UserExt userExt) {
-        return userService.create(User.of(userExt))
+    public ResponseEntity<User> add(@Valid @RequestBody UserExt userExt) {
+        if (!userExt.getPassword().equals(userExt.getConfirmPassword())) {
+            throw new NotMatchedPasswordsException();
+        }
+        User user = User.of(userExt);
+        user.addRole(Role.ofUser());
+        return userService.create(user)
                 .map(u -> ResponseEntity.created(toUri(u.getId())).body(u))
                 .orElseGet(ResponseEntity.status(HttpStatus.CONFLICT)::build);
     }

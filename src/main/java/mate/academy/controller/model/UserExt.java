@@ -1,7 +1,6 @@
 package mate.academy.controller.model;
 
 import mate.academy.model.User;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -12,16 +11,16 @@ public class UserExt {
     private String firstName;
     private String lastName;
 
-//    @Email
-//    @NotBlank
+    @Email
+    @NotBlank
     private String email;
 
-//    @NotNull
-//    @Size(min = 8)
+    @NotNull
+    @Size(min = 8)
     private String password;
 
-//    @NotNull
-//    @Size(min = 8)
+    @NotNull
+    @Size(min = 8)
     private String confirmPassword;
 
     public Long getId() {

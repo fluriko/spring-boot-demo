@@ -20,8 +20,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(CategoryController.class)
+//@RunWith(SpringRunner.class)
+//@WebMvcTest(CategoryController.class)
 public class CategoryControllerTest {
 
     @Autowired
@@ -73,7 +73,7 @@ public class CategoryControllerTest {
     public void getCategoryByIdWithNotCorrect() throws Exception {
         when(categoryService.getById(anyLong())).thenReturn(Optional.empty());
 
-        mockMvc.perform(get("/api/category/5")
+        mockMvc.perform(get("/api/category/10")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isNotFound());
     }

@@ -33,13 +33,13 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade = CascadeType.DETACH)
     @JoinTable(name = "USERS_TO_ROLES",
             joinColumns = @JoinColumn(name = "FK_USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "FK_ROLE_ID"))

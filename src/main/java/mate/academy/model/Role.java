@@ -58,7 +58,15 @@ public class Role {
 
     public static Role ofUser() {
         Role role = new Role();
+        role.setId(2L);
+        role.setName("ROLE_USER");
+        return role;
+    }
+
+    public static Role ofAdmin() {
+        Role role = new Role();
         role.setId(1L);
+        role.setName("ROLE_ADMIN");
         return role;
     }
 
